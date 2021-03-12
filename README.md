@@ -1,4 +1,6 @@
-# OpenedClosedEyesDetector
+# OpenedClosedEyesDetecto
+
+Abra um terminal e siga os passos abaixo
 
 ### Dependências:
 
@@ -30,4 +32,4 @@ Siga os seguintes passos:
 
 Utilizando uma webcam:
 
-    detect_eyes_from_cam.py
+    python3 detect_eyes_from_cam.py
