@@ -8,3 +8,4 @@ imutils
 dlib
 pandas
 matplotlib
+gdown
