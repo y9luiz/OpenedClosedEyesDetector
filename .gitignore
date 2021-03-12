@@ -132,3 +132,5 @@ dmypy.json
 thirdparty/
 *.h5
 dataset/
+*.png
+*.jpg
