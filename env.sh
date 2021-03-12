@@ -28,6 +28,21 @@ then
     bzip2 -d shape_predictor_68_face_landmarks.dat.bz2 
     cd ..
 fi
+if [ ! -f models/eyes_closed_open_model_64_64.h5 ]
+then
+    cd models
+    gdown https://drive.google.com/uc?id=10yUoGbkzXpoIKlhOgtGUmlLqurPDEqgF
+    cd ..
+fi
+if [ ! -d  dataset/dataset_B_FacialImages ]
+then
+    cd dataset
+    gdown https://drive.google.com/uc?id=1niyedvpnATsWMnhcy_DfNNhPGc2J_G8V
+    echo "extraindo dataset"
+    unrar x dataset_B_Facial_Images.rar -idq
+    cd ..
+fi
+
 #http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 
 export PYTHONPATH="./thirdparty/"
