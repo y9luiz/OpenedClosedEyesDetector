@@ -1,6 +1,11 @@
 # OpenedClosedEyesDetecto
 
+Olhos fechados            |  Olhos abertos
+:-------------------------:|:-------------------------:
+![](demo_closed_img.jpg)  |  ![](demo_opened_img.jpg)
+
 Abra um terminal e siga os passos abaixo
+
 
 ### Dependências:
 
