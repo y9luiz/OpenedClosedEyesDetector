@@ -36,7 +36,7 @@ def loadDataset(input_path):
     return (data,labels)
 
 INIT_LR = 1e-4
-EPOCHS = 40
+EPOCHS = 50
 BS = 32
 DATASET_PATH = "./dataset/eyes/"
 if __name__=="__main__":
@@ -63,7 +63,7 @@ if __name__=="__main__":
     headModel = Flatten(name="flatten")(headModel)
     #headModel = Dense(512, activation="relu")(headModel)
     headModel = Dense(128, activation="relu")(headModel)
-    #headModel = Dense(32, activation="relu")(headModel)
+    headModel = Dense(32, activation="relu")(headModel)
 
     headModel = Dropout(0.5)(headModel)
     headModel = Dense(2, activation="softmax")(headModel)
@@ -94,13 +94,12 @@ if __name__=="__main__":
         target_names=lb.classes_))
     # serialize the model to disk
     print("[INFO] saving mask detector model...")
-    model.save("models/eyes_detector_model.h5", save_format="h5")
+    model.save("models/eyes_closed_open_model_64_64.h5", save_format="h5")
     # plot the training loss and accuracy
     N = EPOCHS
     plt.style.use("ggplot")
     plt.figure()
     plt.plot( H.history["loss"], label="train_loss")
-    print(H.history.keys())
     for key in H.history.keys():
         print(f'key:{key} {H.history[key]}')    
     plt.plot( H.history["val_loss"], label="val_loss")

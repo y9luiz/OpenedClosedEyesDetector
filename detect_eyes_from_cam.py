@@ -33,22 +33,22 @@ if __name__ == "__main__":
     range_idxs.append(face_utils.FACIAL_LANDMARKS_68_IDXS["right_eye"])
     range_idxs.append(face_utils.FACIAL_LANDMARKS_68_IDXS["right_eyebrow"])
     range_idxs.append(face_utils.FACIAL_LANDMARKS_68_IDXS["left_eyebrow"])
-    model = load_model("./test_eyes2_novo.h5")
+    model = load_model("./models/eyes_closed_open_model_64_64.h5")
     while cap.isOpened:
         ret, img = cap.read()
-        t_inicial = time.time()
         img = cv2.resize(img,(240,320))
         show_img = img.copy()
         img_gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
         for box in face_detector.detectFaces(img):
             landmark_list = face_landmark_predictor.predictLandmarks(img_gray,box) 
-       
+
             isInRange = lambda idx, idx_range :  True if idx>=idx_range[0] and idx<=idx_range[1] else False
             good_landmarks_list = []
+            cv2.rectangle(show_img,(box[0],box[1]),(box[2],box[3]),(255,0,0))
             for i in range(48):
                 for range_idx in range_idxs:
                     if isInRange(i, range_idx) or i == 30:
-                        good_landmarks_list.append(list(landmark_list[i]))
+                        good_landmarks_list.append(list(landmark_list[i]))  
                         #cv2.circle(show_img,landmark_list[i],1,(255,0,0))
             bb = getBoudingboxFromLandmarksList(good_landmarks_list)
 
@@ -66,20 +66,21 @@ if __name__ == "__main__":
             eye_img = np.expand_dims(eye_img, axis=0)
 
             (closed, opened) = model.predict(eye_img)[0]
-            time_elapsed = (time.time()-t_inicial)*1000
 
-            print(f'tempo gasto: {time_elapsed}')
             #print(f'closed score: {closed} , opened score: {opened}')
-            label = f'Closed: {closed*100}'
+            label = f'Closed: {round(closed*100,2)}%'
             score = closed
+            
             color = (0,0,255)
             if opened > closed:
-                label = f'Opened: {opened*100}'
+                label = f'Opened: {round(opened*100,2)}%'
                 score = opened
                 color = (0,255,0)
             if score>0.9:
-                cv2.putText(show_img,label,(int(box[2]/2),box[3]),1,1,color,thickness=1)     
+                cv2.putText(show_img,label,(int(box[0]),box[3]+10),cv2.FONT_HERSHEY_PLAIN,1,color,2)     
                 print(label) 
+                cv2.rectangle(show_img,(pt1),(pt2),color)
+
         cv2.imshow("img",show_img)
         k = cv2.waitKey(1)
         if k == 27:
