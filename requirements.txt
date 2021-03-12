@@ -5,3 +5,6 @@ pillow
 scipy
 scikit-learn
 imutils
+dlib
+pandas
+matplotlib
