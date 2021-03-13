@@ -57,7 +57,7 @@ if __name__ == "__main__":
         pt2 = (bb[1][0],bb[1][1])
         try:
             eye_img = img[pt1[1]:pt2[1],pt1[0]:pt2[0]]
-            eye_img = cv2.resize(eye_img,(32,32),interpolation=cv2.INTER_AREA)
+            eye_img = cv2.resize(eye_img,64,64),interpolation=cv2.INTER_AREA)
         except:
             continue
         new_file_path =f'./dataset/eyes/{label}/{file}' 
