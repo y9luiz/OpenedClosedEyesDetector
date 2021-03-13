@@ -1,4 +1,8 @@
-# OpenedClosedEyesDetecto
+# OpenedClosedEyesDetector
+
+* Criado por: Luiz Felipe Maciel Correia
+* E-mail: y9luiz@hotmail.com
+
 
 ### Demonstrações:
 
@@ -25,7 +29,7 @@ Abra um terminal e siga os passos abaixo
 
 Primeiro passo:
 
-Configure o script env.sh como source para definir algumas variáveis de ambiente e preparar algumas depêndencias e baixar alguns arquivos como nosso dataset.
+Configure o script env.sh como source para definir algumas variáveis de ambiente e preparar algumas depêndencias e baixar alguns arquivos como nosso dataset, dependendo da sua internet isso pode levar algum tempo.
 
     source env.sh
 
