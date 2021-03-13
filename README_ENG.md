@@ -1,4 +1,4 @@
-[Português](https://github.com/y9luiz/OpenedClosedEyesDetector/blob/main/README.md) | [English](https://github.com/y9luiz/OpenedClosedEyesDetector/blob/main/README.md) 
+[Português](https://github.com/y9luiz/OpenedClosedEyesDetector/blob/main/README.md) | [English](https://github.com/y9luiz/OpenedClosedEyesDetector/blob/main/README_ENG.md) 
 
 # OpenedClosedEyesDetecto
 
