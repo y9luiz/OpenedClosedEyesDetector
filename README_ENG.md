@@ -6,6 +6,11 @@
 * E-mail: y9luiz@hotmail.com
 
 
+### Prerequisites
+
+* Linux system
+* Web cam
+
 ### Demonstration:
 
 #### Video: 

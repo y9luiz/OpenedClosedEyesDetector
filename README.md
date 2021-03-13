@@ -5,6 +5,10 @@
 * Criado por: Luiz Felipe Maciel Correia
 * E-mail: y9luiz@hotmail.com
 
+### Pré-requisitos
+
+* Linux system
+* Web cam
 
 ### Demonstrações:
 
