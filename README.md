@@ -1,8 +1,4 @@
-# OpenedClosedEyesDetector
-
-* Criado por: Luiz Felipe Maciel Correia
-* E-mail: y9luiz@hotmail.com
-
+# OpenedClosedEyesDetecto
 
 * Criado por: Luiz Felipe Maciel Correia
 * E-mail: y9luiz@hotmail.com
