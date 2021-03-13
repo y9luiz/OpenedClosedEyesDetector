@@ -44,3 +44,17 @@ Siga os seguintes passos:
 Utilizando uma webcam:
 
     python3 detect_eyes_from_cam.py
+
+### Resultados
+
+![imagem](plot_novo.png)
+
+|      |  Precision  |    Recall    |    F1 Score       |   support       |
+| :---         |     :---:      |          ---: |      ---:  |     ---:  |
+| ClosedFace   | 0.97     |  0.96   | 0.96      |     238      |
+| OpenedFace     | 0.96       | 0.97    |      0.97    |     247      |
+| -     | -       | -    |      -    |     -     |
+| Accuracy     |   -     | -    |      0.96    |     485      |
+| macro avg     | 0.97       | 0.96    |      0.96    |     485      |
+| weighted avg     | 0.97       | 0.96    |      0.96    |     485      |
+
