@@ -1,5 +1,9 @@
 # OpenedClosedEyesDetecto
 
+* Criado por: Luiz Felipe Maciel Correia
+* E-mail: y9luiz@hotmail.com
+
+
 ### Demonstrações:
 
 #### Video: 
@@ -23,27 +27,29 @@ Abra um terminal e siga os passos abaixo
 
 ### Como instalar?
 
-Primeiro passo:
+*   <b>Primeiro passo</b>:
 
-Configure o script env.sh como source para definir algumas variáveis de ambiente e preparar algumas depêndencias e baixar alguns arquivos como nosso dataset.
+Configure o script env.sh como source para definir algumas variáveis de ambiente e preparar algumas depêndencias e baixar alguns arquivos como nosso dataset, dependendo da sua internet isso pode levar algum tempo.
 
     source env.sh
 
-Segundo passo:
+*   <b>Segundo passo:</b>
 
 Instale as depêndencias seguindo o comando a baixo:
 
     pip3 install -r requirements.txt
 
+Agora siga os passos de como rodar o sistema
+
 ### Como rodar
 
-Siga os seguintes passos:
+*   Siga os seguintes passos no seu terminal:
+*   <b>Utilizando uma webcam</b>
 
+    ```
     source env.sh
-
-Utilizando uma webcam:
-
     python3 detect_eyes_from_cam.py
+    ```
 
 ### Resultados
 
@@ -58,3 +64,7 @@ Utilizando uma webcam:
 | macro avg     | 0.97       | 0.96    |      0.96    |     485      |
 | weighted avg     | 0.97       | 0.96    |      0.96    |     485      |
 
+# Third-party related projects
+
+
+[Ultra Light Fast Generic Face Detector](https://github.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB)
