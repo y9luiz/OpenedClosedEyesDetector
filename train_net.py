@@ -36,16 +36,25 @@ def loadDataset(input_path):
     return (data,labels)
 
 INIT_LR = 1e-4
-EPOCHS = 50
+EPOCHS = 40
 BS = 32
 DATASET_PATH = "./dataset/eyes/"
 if __name__=="__main__":
+    # Carregue todas as imagens e as labels
+    #       OpenedFace e ClosedFace
     data,labels = loadDataset(DATASET_PATH)
+    # Transforme as labels em numeros
     lb = LabelBinarizer()
     labels = lb.fit_transform(labels)
     labels = to_categorical(labels)
+    # "split" o dataset em 2 conjuntos, um de teste
+    # e outro de treino, onde 20% das imagens totais são
+    # imagens de teste e o restante de treino
     (trainX, testX, trainY, testY) = train_test_split(data, labels,
         test_size=0.20, stratify=labels, random_state=42)
+    # Geraremos dados de treino e de teste aplicando
+    # transformações nas imagens de treino e teste
+    # para deixar nossa rede mais precisa
     aug = ImageDataGenerator(
         rotation_range=20,
         zoom_range=0.15,
@@ -54,52 +63,60 @@ if __name__=="__main__":
         shear_range=0.15,
         horizontal_flip=True,
         fill_mode="nearest")
+    # utilizando o modelo pretreinado mobilinetV2
     baseModel = MobileNetV2(weights="imagenet", include_top=False,
         input_tensor=Input(shape=(64, 64, 3)))
-    #print(dir(baseModel.summary))
-    #exit(0)
+    # Adicionamos mais algumas camadas adicionais
     headModel = baseModel.output
+    # reduzimos a saída do nosso modelo
     headModel = MaxPool2D(pool_size=(2, 2))(headModel)
+    # Transformamos uma matriz em array
     headModel = Flatten(name="flatten")(headModel)
-    #headModel = Dense(512, activation="relu")(headModel)
+    # adicionamos dense layers para e prever a imagem
     headModel = Dense(128, activation="relu")(headModel)
-    headModel = Dense(32, activation="relu")(headModel)
-
+    # Adicionamos também uma camada de dropout na
+    # tentativa de evitar overfiting
     headModel = Dropout(0.5)(headModel)
+    # ultima camada que irá definir se temos uma
+    # OpenedFace ou uma Closed Face
     headModel = Dense(2, activation="softmax")(headModel)
+    # Juntamos tudo em um unico model
     model = Model(inputs=baseModel.input, outputs=headModel)
+    # mostramos suas camadas
     print(model.summary())
+    # marcamos para treino as 8 ultimas camadas do modelo 
+    # da Mobilinetv2, ou seja, um fining tuning
     for layer in baseModel.layers[8:]:
     	layer.trainable = True
-    #for layer in baseModel.layers:
-    #    layer.trainable = False
+    # Aplicamos o adam optimizer
     opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
+    # Como temos somente 2 labels a binary_crossentropy
+    # é uma boa escolha
     model.compile(loss="binary_crossentropy", optimizer=opt,
     metrics=["accuracy"])
-    # train the head of the network
-    print("[INFO] training head...")
+    print("Train started")
     H = model.fit(
         aug.flow(trainX, trainY, batch_size=BS),
         steps_per_epoch=len(trainX) // BS, 
         validation_data=(testX, testY),
         validation_steps=len(testX) // BS, 
         epochs=EPOCHS)
-
+    # Para cada imagem teste precisamos encontrar a label que melhor
+    # casa com ela
     predIdxs = model.predict(testX, batch_size=BS)
-    # for each image in the testing set we need to find the index of the
-    # label with corresponding largest predicted probability
     predIdxs = np.argmax(predIdxs, axis=1)
-    # show a nicely formatted classification report
+    # printamos os resultados baseado nas predições feitas no
+    # dataset de teste
     print(classification_report(testY.argmax(axis=1), predIdxs,
         target_names=lb.classes_))
-    # serialize the model to disk
-    print("[INFO] saving mask detector model...")
-    model.save("models/eyes_closed_open_model_64_64.h5", save_format="h5")
-    # plot the training loss and accuracy
+    print("salvando o modelo")
+    model.save("models/eyes_detector_model.h5", save_format="h5")
+    # plot dos dados
     N = EPOCHS
     plt.style.use("ggplot")
     plt.figure()
     plt.plot( H.history["loss"], label="train_loss")
+    print(H.history.keys())
     for key in H.history.keys():
         print(f'key:{key} {H.history[key]}')    
     plt.plot( H.history["val_loss"], label="val_loss")
