@@ -1,3 +1,6 @@
+pip3 install gdown
+sudo apt-get install cmake
+sudo apt-get install unrar
 if [ ! -d thirdparty ]
 then
     mkdir thirdparty
