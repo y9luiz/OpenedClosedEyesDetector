@@ -22,6 +22,9 @@ Olhos fechados            |  Olhos abertos
 
 Abra um terminal e siga os passos abaixo
 
+#### Video de instalação:
+
+https://www.youtube.com/watch?v=_4SJlCg7c0s
 
 ### Dependências:
 

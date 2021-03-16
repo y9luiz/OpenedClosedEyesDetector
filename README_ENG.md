@@ -17,6 +17,10 @@
 
 https://www.youtube.com/watch?v=mTuczb6syts
 
+#### Instalation video:
+
+https://www.youtube.com/watch?v=_4SJlCg7c0s
+
 Closed eyes            |  Opened eyes
 :-------------------------:|:-------------------------:
 ![](demo_closed_img.jpg)  |  ![](demo_opened_img.jpg)
